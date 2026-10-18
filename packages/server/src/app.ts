@@ -1,6 +1,7 @@
 import { createServer, type IncomingMessage, type Server } from "node:http";
 import type { User } from "@lumo/core";
 import { apiV1 } from "./api-v1.ts";
+import { jiraV3 } from "./jira-v3.ts";
 import { send, type Router } from "./router.ts";
 import type { LumoService } from "./service.ts";
 
@@ -24,7 +25,7 @@ export function authenticateRequest(svc: LumoService, req: IncomingMessage): Use
   return null;
 }
 
-export function createApp(svc: LumoService, routers: Router[] = [apiV1(svc)]): Server {
+export function createApp(svc: LumoService, routers: Router[] = [apiV1(svc), jiraV3(svc)]): Server {
   return createServer((req, res) => {
     const url = new URL(req.url ?? "/", "http://localhost");
     const router = routers.find((r) => r.handles(url.pathname));

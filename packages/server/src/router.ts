@@ -5,6 +5,8 @@ export interface RequestContext {
   params: Record<string, string>;
   query: URLSearchParams;
   body: unknown;
+  /** Origin the client used to reach the server, for building `self` links. */
+  baseUrl: string;
   /** Null only on routes registered with `{ public: true }`. */
   user: User | null;
 }
@@ -100,7 +102,7 @@ export class Router {
         if (!user && !route.public) throw new LumoError("unauthorized", "Authentication required");
         const params = Object.fromEntries(route.keys.map((k, i) => [k, decodeURIComponent(m[i + 1]!)]));
         const body = req.method === "GET" || req.method === "DELETE" ? undefined : await readJson(req);
-        const result = await route.handler({ params, query: url.searchParams, body, user });
+        const result = await route.handler({ params, query: url.searchParams, body, user, baseUrl: baseUrlOf(req) });
         if (isReply(result)) send(res, result.status, result.body);
         else send(res, 200, result);
       } catch (err) {
@@ -116,6 +118,11 @@ export class Router {
     const status = pathMatched ? 405 : 404;
     send(res, status, this.formatError(status, pathMatched ? "Method not allowed" : "Not found"));
   }
+}
+
+function baseUrlOf(req: IncomingMessage): string {
+  const proto = String(req.headers["x-forwarded-proto"] ?? "http").split(",")[0]!.trim();
+  return `${proto}://${req.headers.host ?? "localhost"}`;
 }
 
 function isReply(value: unknown): value is Reply {
