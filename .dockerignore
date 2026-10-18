@@ -1,0 +1,10 @@
+**/node_modules
+**/dist
+**/*.tsbuildinfo
+**/*.db
+**/*.db-*
+.git
+.github
+.env
+**/test
+docs
