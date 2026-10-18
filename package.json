@@ -1,0 +1,22 @@
+{
+  "name": "lumo",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Lumo — the open-source Jira alternative. Self-hosted, Jira-API compatible, built for AI agents.",
+  "license": "AGPL-3.0-only",
+  "type": "module",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "packageManager": "pnpm@10.9.2",
+  "scripts": {
+    "typecheck": "tsc -b",
+    "test": "node --disable-warning=ExperimentalWarning --test \"packages/*/test/**/*.test.ts\"",
+    "server": "node --disable-warning=ExperimentalWarning packages/server/src/main.ts",
+    "lumo": "node --disable-warning=ExperimentalWarning packages/cli/src/main.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.18.0",
+    "typescript": "~5.9.3"
+  }
+}
