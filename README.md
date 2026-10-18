@@ -51,6 +51,7 @@ WEB-1  Bug    In Progress  Highest   Administrator  Login page crashes on Safari
 ## Deploy
 
 - **Docker:** `docker build -t lumo . && docker run -p 8080:8080 -v lumo-data:/data lumo`
+- **Fly.io:** `fly deploy` with a volume for SQLite; quickest way to a demo. See [docs/deploy-fly.md](docs/deploy-fly.md).
 - **AWS:** one EC2 instance with Docker Compose and automatic HTTPS. See [docs/deploy-aws.md](docs/deploy-aws.md).
 
 ## Connect Claude (MCP)

@@ -1,0 +1,41 @@
+# Fly.io config for Lumo. Change `app` to a globally unique name before the first deploy.
+# See docs/deploy-fly.md.
+
+app = "lumo-tickets"
+primary_region = "bom"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  HOST = "0.0.0.0"
+  PORT = "8080"
+  LUMO_DB = "/data/lumo.db"
+
+# SQLite lives on this volume. One volume means one machine: do not scale beyond count 1.
+[mounts]
+  source = "lumo_data"
+  destination = "/data"
+
+[deploy]
+  # Rolling deploys need a second machine with its own volume; with one volume, replace in place.
+  strategy = "immediate"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  # Stop when idle to save money; Fly starts it again on the next request (cold start ~1s).
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 0
+
+  [[http_service.checks]]
+    grace_period = "10s"
+    interval = "30s"
+    method = "GET"
+    path = "/api/v1/health"
+    timeout = "3s"
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "512mb"
