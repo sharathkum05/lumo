@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { adfToText, textToAdf } from "../src/adf.ts";
+import { adfToText, textToAdf } from "@lumo/core";
 import { startServer } from "./helpers.ts";
 
 const adf = (text: string) => ({ type: "doc", version: 1, content: [{ type: "paragraph", content: [{ type: "text", text }] }] });

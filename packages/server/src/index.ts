@@ -4,4 +4,3 @@ export { LumoService, type CreateIssueInput, type UpdateIssueInput, type SearchR
 export { apiV1 } from "./api-v1.ts";
 export { Router } from "./router.ts";
 export { jiraV3 } from "./jira-v3.ts";
-export { adfToText, textToAdf, type AdfNode } from "./adf.ts";

@@ -107,7 +107,15 @@ export function apiV1(svc: LumoService): Router {
     return reply(204);
   });
 
-  r.get("/issues/:key/transitions", ({ params }) => svc.listTransitions(params.key!));
+  r.get("/issues/:key/transitions", ({ params }) => {
+    const { project } = svc.getIssue(params.key!);
+    const statuses = svc.getWorkflow(project.workflowId).statuses;
+    return svc.listTransitions(params.key!).map((t) => ({
+      id: t.id,
+      name: t.name,
+      to: statuses.find((s) => s.id === t.to)!,
+    }));
+  });
   r.post("/issues/:key/transitions", ({ params, body }) => {
     const transition = optString(obj(body), "transition");
     if (!transition) throw new LumoError("invalid_input", '"transition" is required');

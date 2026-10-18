@@ -1,4 +1,5 @@
 import {
+  adfToText,
   ISSUE_TYPES,
   LumoError,
   PRIORITIES,
@@ -8,9 +9,9 @@ import {
   type Status,
   type StatusCategory,
   type Transition,
+  textToAdf,
   type User,
 } from "@lumo/core";
-import { adfToText, textToAdf } from "./adf.ts";
 import { intParam, obj, reply, Router } from "./router.ts";
 import type { LumoService, UpdateIssueInput } from "./service.ts";
 

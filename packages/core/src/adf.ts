@@ -1,5 +1,5 @@
 // Jira REST v3 sends rich text as Atlassian Document Format (ADF), a JSON tree. Lumo stores plain text,
-// so the compatibility layer converts at the edge. Formatting beyond paragraphs, line breaks and lists is
+// so the Jira API layer and the Jira client backend convert at the edge. Formatting beyond paragraphs, line breaks and lists is
 // flattened to text for now.
 
 export interface AdfNode {
