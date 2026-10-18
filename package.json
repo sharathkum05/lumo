@@ -13,7 +13,8 @@
     "typecheck": "tsc -b",
     "test": "node --disable-warning=ExperimentalWarning --test \"packages/*/test/**/*.test.ts\"",
     "server": "node --disable-warning=ExperimentalWarning packages/server/src/main.ts",
-    "lumo": "node --disable-warning=ExperimentalWarning packages/cli/src/main.ts"
+    "lumo": "node --disable-warning=ExperimentalWarning packages/cli/src/main.ts",
+    "mcp": "node --disable-warning=ExperimentalWarning packages/mcp/src/main.ts"
   },
   "devDependencies": {
     "@types/node": "^22.18.0",
