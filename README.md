@@ -48,6 +48,11 @@ KEY    TYPE   STATUS       PRIORITY  ASSIGNEE       SUMMARY
 WEB-1  Bug    In Progress  Highest   Administrator  Login page crashes on Safari
 ```
 
+## Deploy
+
+- **Docker:** `docker build -t lumo . && docker run -p 8080:8080 -v lumo-data:/data lumo`
+- **AWS:** one EC2 instance with Docker Compose and automatic HTTPS. See [docs/deploy-aws.md](docs/deploy-aws.md).
+
 ## Connect Claude (MCP)
 
 ```sh

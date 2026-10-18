@@ -1,0 +1,34 @@
+# Single-host deployment: Lumo behind Caddy, which gets and renews a TLS certificate automatically.
+# Run from the repository root:  docker compose -f deploy/aws/docker-compose.yml up -d --build
+
+services:
+  lumo:
+    build: ../..
+    restart: unless-stopped
+    environment:
+      LUMO_ADMIN_EMAIL: ${LUMO_ADMIN_EMAIL:-admin@localhost.local}
+    volumes:
+      - lumo-data:/data
+    # Not published to the host: only Caddy can reach it.
+    expose:
+      - "8080"
+
+  caddy:
+    image: caddy:2.8
+    restart: unless-stopped
+    depends_on:
+      - lumo
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      LUMO_DOMAIN: ${LUMO_DOMAIN:?Set LUMO_DOMAIN to the hostname that points at this server}
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+
+volumes:
+  lumo-data:
+  caddy-data:
+  caddy-config:

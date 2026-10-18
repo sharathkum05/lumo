@@ -1,0 +1,4 @@
+{$LUMO_DOMAIN} {
+	encode gzip
+	reverse_proxy lumo:8080
+}
