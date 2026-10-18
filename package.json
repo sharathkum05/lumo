@@ -8,7 +8,7 @@
   "engines": {
     "node": ">=22.18"
   },
-  "packageManager": "pnpm@10.9.2",
+  "packageManager": "pnpm@9.15.4",
   "scripts": {
     "typecheck": "tsc -b",
     "test": "node --disable-warning=ExperimentalWarning --test \"packages/*/test/**/*.test.ts\"",
