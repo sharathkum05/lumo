@@ -15,6 +15,16 @@ importers:
         specifier: ~5.9.3
         version: 5.9.3
 
+  packages/client:
+    dependencies:
+      '@lumo/core':
+        specifier: workspace:*
+        version: link:../core
+    devDependencies:
+      '@lumo/server':
+        specifier: workspace:*
+        version: link:../server
+
   packages/core: {}
 
   packages/server:
