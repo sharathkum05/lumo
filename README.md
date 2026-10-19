@@ -1,3 +1,10 @@
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/brand/lumo-logo-dark.svg">
+    <img src="assets/brand/lumo-logo.svg" alt="Lumo" height="72">
+  </picture>
+</p>
+
 # Lumo
 
 **The open-source Jira alternative.** Self-hosted. Jira-API compatible. Built for AI agents.
